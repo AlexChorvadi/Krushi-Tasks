@@ -2,15 +2,114 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task One</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Top 4 Game List</title>
+    <style>
+        body {
+            background-color: #c4a675;
+            font-family: "Poppins", sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #d32f2f;
+        }
+
+        .festival {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 90%;
+        }
+
+        form {
+            background-color: #ffe0b2;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        button {
+            background-color: #ff7043;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e64a19;
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 
-<body class="h-screen flex items-center justify-center">
-    <h6 class="bg-red-500 text-white px-4 py-2 rounded-full 
-      font-bold text-2xl hover:bg-green-500 hover:scale-110 duration-300">Krushi Task 1</h6>
+<body>
+    <h1>Welcome to Top 4 Game List!!</h1>
+    <p>
+        Here is the list of the top 4 games you must try out this year:
+    </p>
+    <h2>Game Details</h2>
+
+    <section class="festival">
+        <h3>1. Minecraft</h3>
+        <p>
+            A sandbox survival game where creativity is the core mechanic. Players mine resources, build worlds,
+            automate systems, and survive hostile environments. Simple graphics, infinite depth.
+        </p>
+        <img src="minecraft-logo.jpg" style="height: 150px;width: 150px;" alt="Minecraft" />
+    </section>
+    <section class="festival">
+        <h3>2. Clash of Clans</h3>
+        <p>
+            A mobile strategy classic focused on base building, resource management, and clan-based warfare. Addictive
+            progression loops and long-term engagement through social play.
+        </p>
+        <img src="Clash-of-Clans-Logo.png" style="height: 150px; width: 150px;" alt="Clash of Clans" />
+    </section>
+    <section class="festival">
+        <h3>3. Stardew Valley</h3>
+        <p>
+            A cozy farming and life-simulation game with surprising emotional depth. Players manage crops,
+            relationships, exploration, and personal growth at their own pace.
+        </p>
+        <img src="stardew-valley-logo.png" style="height: 150px; width: 150px;" alt="Stardew Valley" />
+    </section>
+    <section class="festival">
+        <h3>4. Among Us</h3>
+        <p>
+            A multiplayer social deduction game where trust is the real currency. Simple mechanics, massive replay
+            value, and perfect for stream-driven virality.
+        </p>
+        <img src="Amoung-us.png" style="height: 150px; width: 150px;" alt="Amoung-us" />
+    </section>
+    <form>
+        <h2>Book Your Game Now!</h2>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required /><br /><br />
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required /><br /><br />
+        <label>Region:</label>
+        <select id="region" name="region" required>
+            <option value="">Select Region</option>
+            <option value="Gujarat" selected>Gujarat</option>
+            <option value="south">South India</option>
+            <option value="east">East India</option>
+            <option value="west">West India</option>
+            <option value="central">Central India</option>
+        </select><br /><br />
+        <label for="tickets">Number of Games:</label>
+        <input type="number" id="tickets" name="tickets" min="1" max="10" required /><br /><br />
+        <button type="submit">Book Games</button>
+    </form>
 </body>
 
 </html>
