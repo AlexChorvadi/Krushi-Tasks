@@ -808,6 +808,27 @@ footer .Copyright {
     align-items: center;
 }
 
+footer .social-icons {
+    display: flex;
+    gap: 20px;
+    color: #444444;
+}
+
+footer .social-icons div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0px 2px 10px 0px #00000061;
+    height: 40px;
+    width: 40px;
+}
+
+footer .social-icons div:hover {
+    cursor: pointer;
+    background-color: #FA7436;
+    color: white;
+}
 
 /* footer */
 
@@ -824,7 +845,7 @@ footer .Copyright {
         width: 270px;
     }
 
-    
+
     footer {
         padding: 20px 100px;
     }
