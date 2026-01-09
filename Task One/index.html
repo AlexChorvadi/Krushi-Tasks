@@ -5,111 +5,362 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Top 4 Game List</title>
-    <style>
-        body {
-            background-color: #c4a675;
-            font-family: "Poppins", sans-serif;
-            text-align: center;
-        }
-
-        h1 {
-            color: #d32f2f;
-        }
-
-        .festival {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            width: 90%;
-        }
-
-        form {
-            background-color: #ffe0b2;
-            padding: 20px;
-            border-radius: 10px;
-            width: 300px;
-            margin: 0 auto;
-        }
-
-        table {
-            width: 80%;
-            margin: 20px auto;
-        }
-
-        button {
-            background-color: #ff7043;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #e64a19;
-            transform: scale(1.1);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <h1>Welcome to Top 4 Game List!!</h1>
-    <p>
-        Here is the list of the top 4 games you must try out this year:
-    </p>
-    <h2>Game Details</h2>
+    <header>
+        <nav class="navbar">
+            <span class="logo">Trabook <img src="logo.svg" alt="Logo"></span>
+            <ul class="menus">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Destination</a></li>
+                <li><a href="#">Tour</a></li>
+                <li><a href="#">Blog</a></li>
+            </ul>
+            <div class="login">
+                <button class="btn-login">Login</button>
+                <button class="btn-sign">Sign Up</button>
+            </div>
+        </nav>
+        <div class="header">
+            <div class="header-content">
+                <p class="header-heading">
+                    Get started your exciting <span>journey</span> with us.
+                </p>
+                <p class="header-subheading">
+                    A Team of experienced tourism professionals will<br /> provide you with the best advice and tips for
+                    your<br /> desire place.
+                </p>
+                <button class="btn-discover">Discover Now</button>
+            </div>
+            <div class="header-image">
+                <!-- <img src="image.png" alt="Header Image" /> -->
+            </div>
 
-    <section class="festival">
-        <h3>1. Minecraft</h3>
-        <p>
-            A sandbox survival game where creativity is the core mechanic. Players mine resources, build worlds,
-            automate systems, and survive hostile environments. Simple graphics, infinite depth.
-        </p>
-        <img src="minecraft-logo.jpg" style="height: 150px;width: 150px;" alt="Minecraft" />
+            <div class="features">
+                <ul>
+                    <li>
+                        <div>
+                            <p class="features-header">Location</p>
+                            <p>where are you going</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <p class="features-header">Date</p>
+                            <p>when you will go</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <p class="features-header">Guest</p>
+                            <p>Number of guest</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <button class="btn-explore">Explore Now</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <section class="section-1">
+        <div class="section-1-content">
+            <p class="Section-1-Heading">Things you need <span>to do</span></p>
+            <p class="Section-1-SubHeading">We ensure that you’ll embark on a perfectly planned, <br /> safe vacation at
+                a
+                price you can afford. </p>
+            <div class="section-1-cards">
+                <div class="card">
+                    <img src="section-1_1.png" alt="Card Image" />
+                    <p class="Section-1-Card-Heading">Sign Up</p>
+                    <p class="Section-1-card-subheader">Completes all the work associated with planning and processing.
+                    </p>
+                </div>
+                <div class="card">
+                    <img src="section-1_2.png" alt="Card Image" />
+                    <p class="Section-1-Card-Heading">Worth of Money</p>
+                    <p class="Section-1-card-subheader">After successful access then book from exclusive deals &
+                        pricing.</p>
+                </div>
+                <div class="card">
+                    <img src="section-1_3.png" alt="Card Image" />
+                    <p class="Section-1-Card-Heading">Exciting Travel</p>
+                    <p class="Section-1-card-subheader">Start and explore a wide range of exciting travel experience..
+                    </p>
+                </div>
+            </div>
+        </div>
     </section>
-    <section class="festival">
-        <h3>2. Clash of Clans</h3>
-        <p>
-            A mobile strategy classic focused on base building, resource management, and clan-based warfare. Addictive
-            progression loops and long-term engagement through social play.
-        </p>
-        <img src="Clash-of-Clans-Logo.png" style="height: 150px; width: 150px;" alt="Clash of Clans" />
+    <section class="section-2">
+        <div class="section-2-content">
+            <p class="Section-2-Heading">Exclusive <span>deals & discounts</span></p>
+            <p class="Section-2-SubHeading">Discover our fantastic early booking discounts <br /> & start planning your
+                journey. </p>
+            <div class="section-2-cards">
+                <div class="card">
+                    <img src="section-2_1.png" alt="Card Image" />
+                    <div class="section-2-card-content">
+                        <div class="section-2-card-header">
+                            <span class="section-2-city">Madrid</span> <span class="section-2-rating"><img
+                                    src="star.svg">4.8</span>
+                        </div>
+                        <div class="section-2-card-subheader">
+                            <span class="section-2-country"><img src="location.svg">Spain</span>
+                            <div><span class="section-2-org-price">$950</span>
+                                <span class="section-2-dis-price">$850</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="section-2_2.png" alt="Card Image" />
+                    <div class="section-2-card-content">
+                        <div class="section-2-card-header">
+                            <span class="section-2-city">Firenze</span> <span class="section-2-rating"><img
+                                    src="star.svg">4.5</span>
+                        </div>
+                        <div class="section-2-card-subheader">
+                            <span class="section-2-country"><img src="location.svg">Italy</span>
+                            <div><span class="section-2-org-price">$850</span> <span
+                                    class="section-2-dis-price">$750</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="section-2_3.png" alt="Card Image" />
+                    <div class="section-2-card-content">
+                        <div class="section-2-card-header">
+                            <span class="section-2-city">Paris </span><span class="section-2-rating"><img
+                                    src="star.svg">4.4</span>
+                        </div>
+                        <div class="section-2-card-subheader">
+                            <span class="section-2-country"><img src="location.svg">France</span>
+                            <div><span class="section-2-org-price">$699</span>
+                                <span class="section-2-dis-price">$599</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="section-2_4.png" alt="Card Image" />
+                    <div class="section-2-card-content">
+                        <div class="section-2-card-header">
+                            <span class="section-2-city">London </span><span class="section-2-rating"><img
+                                    src="star.svg">4.8</span>
+                        </div>
+                        <div class="section-2-card-subheader">
+                            <span class="section-2-country"><img src="location.svg">UK</span>
+                            <div><span class="section-2-org-price">$850</span>
+                                <span class="section-2-dis-price">$850</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-2-cards-buttons">
+                <button class="btn-previous">&lt;</button>
+                <button class="btn-next">&gt;</button>
+            </div>
+        </div>
     </section>
-    <section class="festival">
-        <h3>3. Stardew Valley</h3>
-        <p>
-            A cozy farming and life-simulation game with surprising emotional depth. Players manage crops,
-            relationships, exploration, and personal growth at their own pace.
-        </p>
-        <img src="stardew-valley-logo.png" style="height: 150px; width: 150px;" alt="Stardew Valley" />
+    <section class="section-3">
+        <div class="section-3-content">
+            <p class="Section-3-Heading">Best <span>vacation plan</span></p>
+            <p class="Section-3-SubHeading">Plan your perfect vacation with our travel agency. Choose <br /> among
+                hundreds of all-inclusive offers! </p>
+            <div class="section-3-cards-buttons">
+                <button class="btn-previous">&lt;</button>
+                <button class="btn-next">&gt;</button>
+            </div>
+            <div class="section-3-cards">
+                <div class="card">
+                    <img src="section-3_1.png" alt="Card Image" />
+                    <div class="section-3-card-content">
+                        <div class="section-3-card-header">
+                            <span class="section-3-city">Rome, Italty</span> <span class="section-3-price">$5,42k</span>
+                        </div>
+                        <div class="section-3-card-subheader">
+                            <span class="section-3-days d-flex"><img src="navigate.svg">10 Days Trip</span>
+                            <span class="section-3-rating d-flex"><img src="star.svg">4.8</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="section-3_2.png" alt="Card Image" />
+                    <div class="section-3-card-content">
+                        <div class="section-3-card-header">
+                            <span class="section-3-city">London,UK</span> <span class="section-3-price">$2,42k</span>
+                        </div>
+                        <div class="section-3-card-subheader">
+                            <span class="section-3-days d-flex"><img src="navigate.svg">07 Days Trip</span>
+                            <span class="section-3-rating d-flex"><img src="star.svg">4.7</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="section-3_3.png" alt="Card Image" />
+                    <div class="section-3-card-content">
+                        <div class="section-3-card-header">
+                            <span class="section-3-city">Osaka,Japan </span><span class="section-3-price">$5,42k</span>
+                        </div>
+                        <div class="section-3-card-subheader">
+                            <span class="section-3-days d-flex"><img src="navigate.svg">10 Days Trip</span>
+                            <span class="section-3-rating d-flex"><img src="star.svg">4.8</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-    <section class="festival">
-        <h3>4. Among Us</h3>
-        <p>
-            A multiplayer social deduction game where trust is the real currency. Simple mechanics, massive replay
-            value, and perfect for stream-driven virality.
-        </p>
-        <img src="Amoung-us.png" style="height: 150px; width: 150px;" alt="Amoung-us" />
+    <section class="section-4">
+        <div class="section-4-content">
+            <div class="section-4-heading-container">
+                <p class="Section-4-Heading">What people say <br /> <span>about Us.</span></p>
+                <p class="Section-4-SubHeading">Our Clients send us bunch of smilies with our services <br /> and we
+                    love
+                    them.</p>
+                <div class="section-3-cards-buttons">
+                    <button class="btn-previous">&lt;</button>
+                    <button class="btn-next">&gt;</button>
+                </div>
+            </div>
+            <div class="section-4-reviews">
+                <div class="section-4-reviews-card active-card">
+                    <div class="section-4-card-content">
+                        <img src="review-img.png" height="50px" alt="Review Image" width="50px" />
+                        <p class="Section-4-Review-SubHeading">“On the Windows talking painted pasture yet its express
+                            parties use. Sure last upon he same as knew next. Of believed or diverted no.”</p>
+                        <p class="Section-4-Reviewer-Name">Mike taylor</p>
+                        <p class="Section-4-Reviewer-subhead">Lahore, Pakistan</p>
+                    </div>
+                </div>
+                <div class="section-4-reviews-card">
+                    <div class="section-4-card-content">
+                        <img src="review-img.png" height="50px" alt="Review Image" width="50px" />
+                        <p class="Section-4-Review-SubHeading">“On the Windows talking painted pasture yet its express
+                            parties use. Sure last upon he same as knew next. Of believed or diverted no.”</p>
+                        <p class="Section-4-Reviewer-Name">Chris Thomas</p>
+                        <p class="Section-4-Reviewer-subhead">CEO of Red Button</p>
+                    </div>
+                </div>
+            </div>
     </section>
-    <form>
-        <h2>Book Your Game Now!</h2>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required /><br /><br />
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required /><br /><br />
-        <label>Region:</label>
-        <select id="region" name="region" required>
-            <option value="">Select Region</option>
-            <option value="Gujarat" selected>Gujarat</option>
-            <option value="south">South India</option>
-            <option value="east">East India</option>
-            <option value="west">West India</option>
-            <option value="central">Central India</option>
-        </select><br /><br />
-        <label for="tickets">Number of Games:</label>
-        <input type="number" id="tickets" name="tickets" min="1" max="10" required /><br /><br />
-        <button type="submit">Book Games</button>
-    </form>
+    <section class="section-5">
+        <div class="section-5-content">
+            <p class="Section-5-Heading">Get update with <span>latest blog</span></p>
+            <div class="section-5-cards">
+                <div class="card">
+                    <img src="section-5_1.png" alt="Card Image" />
+                    <div class="section-5-card-content">
+                        <div class="section-5-card-header">
+                            <span class="section-5-title">The Amazing Difference a Year of Travelling.</span>
+                        </div>
+                        <div class="section-5-card-subheader">
+                            <span class="section-5-date">July 27, 2021</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="section-5_2.png" alt="Card Image" />
+                    <div class="section-5-card-content">
+                        <div class="section-5-card-header">
+                            <span class="section-5-title">Travel far enough, you meet yourself.</span>
+                        </div>
+                        <div class="section-5-card-subheader">
+                            <span class="section-5-date">July 27, 2021</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="section-5_3.png" alt="Card Image" />
+                    <div class="section-5-card-content">
+                        <div class="section-5-card-header">
+                            <span class="section-5-title">How to Save Money While Visiting Africa .</span>
+                        </div>
+                        <div class="section-5-card-subheader">
+                            <span class="section-5-date">July 27, 2021</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="section-5_4.png" alt="Card Image" />
+                    <div class="section-5-card-content">
+                        <div class="section-5-card-header">
+                            <span class="section-5-title">Reflections on 5 Months of Travel: Time to Hang</span>
+                        </div>
+                        <div class="section-5-card-subheader">
+                            <span class="section-5-date">July 27, 2021</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-5-cards-buttons">
+                <div class="section-5-paggination"></div>
+                <div class="section-5-paggination active"></div>
+                <div class="section-5-paggination"></div>
+            </div>
+        </div>
+    </section>
+    <section class="section-6">
+        <div class="section-6-content">
+            <div class="section-6-main-section">
+                <img class="circls" src="circls.svg" alt="Mail Icon" />
+                <img class="trees" src="trees.svg" alt="Mail Icon" />
+                <p class="Section-6-Heading">Subscribe and get exclusive <br /> deals & offer</p>
+                <div class="section-6-mail">
+                    <img src="icon-mail.svg" height="16" width="18.67">
+                    <input type="email" placeholder="Enter your mail">
+                    <button>Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <span class="logo">Trabook <img src="logo.svg" alt="Logo"></span>
+                <p>
+                    Book your trip in minute, get full <br />
+                    Control for much longer.
+                </p>
+                <div>
+                    <div class="icon-fb"></div>
+                    <div class="icon-ig"></div>
+                    <div class="icon-x"></div>
+                </div>
+            </div>
+            <div class="footer-section links">
+                <ul>
+                    <li>Company</li>
+                    <li>About</li>
+                    <li>Careers</li>
+                    <li>Logistic</li>
+                    <li>Privacy & Policy</li>
+                </ul>
+                <ul>
+                    <li>Contact</li>
+                    <li>Help/FAQ</li>
+                    <li>Press</li>
+                    <li>Affilates</li>
+                </ul>
+                <ul>
+                    <li>More</li>
+                    <li>Press Centre</li>
+                    <li>Our Blog</li>
+                    <li>Low fare tips</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-section Copyright">
+            <p>Copyright, Trabook 2022. All rights reserved.</p>
+            <p>Terms & Conditions</p>
+        </div>
+    </footer>
 </body>
 
 </html>
