@@ -8,7 +8,7 @@
 //j }];
 const resultArr = [];
 const data = { isWaitingforAnotherCard: false, isQuerying: false, previousCard: null };
-
+const click = new Audio("src/click_sound.mp3");
 function startGame() {
     const startBtn = document.getElementById("startBtn");
     startBtn.classList.add("hidden");
@@ -21,11 +21,33 @@ function generateCards() {
     const container = document.getElementById("cardContainer");
     congratsMessage.classList.remove("show");
 
-    const letters = ["A", "B", "C", "D", "E", "F"];
+    const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"];
     const imgs = { "A": "img1.jpg", "B": "img2.jpg", "C": "img3.jpg", "D": "img4.jpg", "E": "img5.jpg", "F": "img6.jpg" };
+    const animals = {
+        A: "🦓",
+        B: "🐐",
+        C: "🦘",
+        D: "🐘",
+        E: "🦒",
+        F: "🦉",
+        G: "🐊",
+        H: "🦔",
+        I: "🐅",
+        J: "🦥",
+        K: "🦦",
+        L: "🐇",
+        M: "🦨",
+        N: "🦡",
+        O: "🐿️",
+        P: "🦃",
+        Q: "🦜",
+        R: "🦩",
+        S: "🦫"
+    };
+
     const copied_letters = [...letters, ...letters]; // Duplicate letters for pairs
 
-    for (let i = 1; i <= count; i++) {
+    for (let i = 1; i <= (letters.length * 2); i++) {
         const card = document.createElement("div");
         card.className = "card";
         let randomChar = copied_letters[Math.floor(Math.random() * copied_letters.length)];
@@ -38,7 +60,8 @@ function generateCards() {
                     Click to Flip
                 </div>
                 <div class="card-back" data-position="${i}" data-letter="${randomChar}">
-                    <img src="img/${imgs[randomChar]}" loading="lazy" alt="Card ${i}"/>
+                    
+                    ${animals[randomChar]}
                 </div>
             </div>
         `;
@@ -82,6 +105,7 @@ function revealCards(card) {
     const cardPosition = card.querySelector(".card-back").getAttribute("data-position");
     const resultArrEntry = resultArr.filter(x => x.letter === cardLetter);
     if (resultArrEntry.length > 0) {
+        click.play();
         resultArrEntry[0].Position.push(cardPosition);
         // createSparks(data.previousCard); 
         data.previousCard.setAttribute("matched", "true");
@@ -114,7 +138,7 @@ function revealCards(card) {
 
 function matchedResult() {
     const matchedCards = resultArr.filter(x => x.Position.length > 1);
-    if (matchedCards.length === 6) {
+    if (matchedCards.length === 19) {
         showCongrats();
     }
 }
