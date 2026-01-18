@@ -100,12 +100,14 @@ function revealCards(card) {
         return;
     }
     card.classList.toggle("flipped");
+    document.getElementById("moveCount").innerText = parseInt(document.getElementById("moveCount").innerText) + 1;
     const revealInterval = 1000; // milliseconds
     const cardLetter = card.querySelector(".card-back").getAttribute("data-letter");
     const cardPosition = card.querySelector(".card-back").getAttribute("data-position");
     const resultArrEntry = resultArr.filter(x => x.letter === cardLetter);
     if (resultArrEntry.length > 0) {
         click.play();
+        document.getElementById("matchedCount").innerText = parseInt(document.getElementById("matchedCount").innerText) + 1;
         resultArrEntry[0].Position.push(cardPosition);
         // createSparks(data.previousCard); 
         data.previousCard.setAttribute("matched", "true");
