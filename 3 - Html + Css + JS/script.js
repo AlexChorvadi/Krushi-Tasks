@@ -38,7 +38,7 @@ function generateCards() {
                     Click to Flip
                 </div>
                 <div class="card-back" data-position="${i}" data-letter="${randomChar}">
-                    <img src="img/${imgs[randomChar]}" alt="Card ${i}"/>
+                    <img src="img/${imgs[randomChar]}" loading="lazy" alt="Card ${i}"/>
                 </div>
             </div>
         `;
@@ -168,6 +168,8 @@ function shuffleArray(arr) {
 }
 
 function clear() {
+    const container = document.getElementById("cardContainer");
+    container.innerHTML = "";
     resultArr.length = 0;
     data.isWaitingforAnotherCard = false;
     data.isQuerying = false;
