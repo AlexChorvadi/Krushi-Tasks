@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Cards</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <button class="startBtn" id="startBtn" onclick="startGame()">Start Game</button>
+
+    <div class="controls">
+        <h4 class="gameName">Flip & Find</h4>
+        <div>
+            <button class="Restart" onclick="generateCards()">🔁Restart</button>
+            <button class="shuffle" id="shuffleBtn" onclick="btnShuffleClick()">🔀 Shuffle</button>
+        </div>
+    </div>
+
+    <div class="card-container" id="cardContainer"></div>
+    
+    <div class="congratsMessage" id="congratsMessage">
+        <h1>🎉 Congratulations! 🎉</h1>
+        <p>You matched all the cards!</p>
+        <button class="Restart" onclick="generateCards()">Play Again</button>
+    </div>
+
+    <footer class="footer">
+        <p>Made with <span class="heart">❤️</span> Krushi</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
