@@ -200,4 +200,6 @@ function clear() {
     data.isWaitingforAnotherCard = false;
     data.isQuerying = false;
     data.previousCard = null;
+    document.getElementById("moveCount").innerText = "0";
+    document.getElementById("matchedCount").innerText = "0";
 }
