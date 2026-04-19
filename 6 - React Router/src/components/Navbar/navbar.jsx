@@ -17,7 +17,7 @@ const Navbar = ({ onOpenModal, onOpenFavModal }) => {
 
           {/* 🔥 Logo */}
           <h1 className="text-xl font-extrabold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent tracking-wide">
-            Krushi's Shop
+            Krushi's Store
           </h1>
 
           {/* Desktop */}
