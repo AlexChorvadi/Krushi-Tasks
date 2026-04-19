@@ -96,9 +96,10 @@ export default function Cart() {
                         payload: item,
                       })
                     }
-                    className="text-red-400 text-sm hover:text-red-500"
+                    className="text-red-400 text-sm hover:text-red-500 "
                   >
-                    ✕ Remove
+                    X
+                    <span className="hidden md:inline"> Remove</span>
                   </button>
                 </div>
               </div>

@@ -1,16 +1,150 @@
-# React + Vite
+# 🛍️ KrushiStore
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern dark-themed e-commerce UI built with React, featuring cart management, favorites, and a clean shopping experience.
 
-Currently, two official plugins are available:
+🔗 **Live Demo:** https://krushistore.netlify.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* 🧾 **Product Listing (API)**
+  Fetches real product data using Axios.
 
-## Expanding the ESLint configuration
+* 🛒 **Cart System**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+  * Add to cart
+  * Remove from cart
+  * Quantity management (increment/decrement)
+  * Dynamic total calculation
+
+* ❤️ **Favorites System**
+
+  * Add/remove favorites
+  * View in modal
+
+* 💸 **Discount Logic**
+
+  * Flat **10% discount** applied on total price
+
+* 🌙 **Dark UI**
+
+  * Fully dark-themed interface
+  * Consistent design system (glass + gradients + glow)
+
+* 📱 **Responsive Design**
+
+  * Works across mobile, tablet, and desktop
+
+* 🧩 **Modal System**
+
+  * Favorites displayed in modal
+  * Clean overlay with blur effect
+
+---
+
+## 🛠️ Tech Stack
+
+* **React (Vite)**
+* **Tailwind CSS (CDN)**
+* **React Router**
+* **Context API + useReducer**
+* **Axios**
+
+---
+
+## 📁 Folder Structure
+
+```
+src/
+│
+├── assets/
+├── components/
+│   ├── Cart/
+│   │   └── Cart.jsx
+│   ├── Navbar/
+│   │   └── navbar.jsx
+│   ├── ProductCard/
+│   │   └── ProductCard.jsx
+│   ├── ProductList/
+│   │   └── ProductList.jsx
+│   ├── ProductModal/
+│   │   ├── FavModal.jsx
+│   │   └── ProductModal.jsx
+│   │── footer.jsx
+│   │── header.jsx
+│   └── Modal.jsx
+│
+├── App.jsx
+├── CartContext.jsx
+├── CartProvider.jsx
+├── main.jsx
+```
+
+---
+
+## ⚙️ Setup Instructions
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-username/krushistore.git
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Run the development server:
+
+```bash
+npm run dev
+```
+
+---
+
+## 🧠 How It Works
+
+* Global state is managed using **Context API + useReducer**
+* Cart logic handles:
+
+  * Quantity updates
+  * Price calculations
+  * Discount application
+* Products are fetched once and cached in state
+* UI follows a **consistent dark design system**:
+
+  * Background: `#020617`
+  * Cards: `#0f172a`
+  * Accent: gradient (pink → purple → indigo)
+
+---
+
+## 🔮 Future Improvements
+
+* 🧮 Coupon code system (dynamic discounts)
+* 💾 Cart persistence (localStorage)
+* 🔔 Toast notifications (instead of alerts)
+* 🎬 Animations (Framer Motion)
+* 🛒 Cart drawer instead of modal
+* 🔍 Search & filtering
+
+---
+
+## 👨‍💻 Author
+
+Built with focus on clean UI and real-world logic by **Krushi**
+
+---
+
+## 💥 Final Note
+
+This project goes beyond basic CRUD—it focuses on:
+
+* UI consistency
+* State management
+* Real cart behavior
+
+A solid step toward production-level frontend development.

@@ -98,9 +98,9 @@ const Navbar = ({ onOpenModal, onOpenFavModal }) => {
               )}
             </button>
 
-            <Link to="/cart" onClick={() => setMenuOpen(false)}>
-              <button className="flex items-center justify-between px-4 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow">
-                <span>🛒 Cart</span>
+            <Link className="flex items-center justify-between px-4 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow" to="/cart" onClick={() => setMenuOpen(false)}>
+              <button>
+                <span>🛒 Cart </span>
                 {cartCount > 0 && (
                   <span className="bg-white text-indigo-600 text-xs px-2 rounded-full">
                     {cartCount}

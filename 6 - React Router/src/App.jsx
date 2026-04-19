@@ -9,6 +9,7 @@ import FavModal from "./components/ProductModal/FavModal";
 import Cart from "./components/Cart/Cart";
 
 import { CartProvider } from "./CartContext";
+import Footer from "./components/footer";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,6 +33,7 @@ function App() {
       <ModalPortal open={isFavModalOpen} close={() => setIsFavModalOpen(false)} Header="Your Favourites">
         <FavModal />
       </ModalPortal>
+      <Footer />
     </CartProvider>
   );
 }
