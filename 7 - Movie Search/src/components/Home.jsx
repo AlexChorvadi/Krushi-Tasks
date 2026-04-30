@@ -20,6 +20,13 @@ export default function Home() {
   }, [state.MoviesList]);
 
   useEffect(() => {
+
+    if(search === undefined) {
+      dispatch({ type: "ADD_MOVIE", payload: [] });
+      dispatch({ type: "SET_TOTAL_MOVIES", payload: 0 });
+      return;
+    }
+
     dispatch({ type: "SET_LOADING", payload: true });
     dispatch({ type: "SET_CURRENT_PAGE", payload: currentPage });
 
