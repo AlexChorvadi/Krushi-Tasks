@@ -3,6 +3,10 @@ export const MovieContext = createContext();
 
 const initialState = {
     MoviesList: [],
+    totalMovies: 0,
+    currentPage: 1,
+    isLoading: false,
+    errorMsg: null,
     FavMovies:[],
     IMDBID:null
 }
@@ -43,6 +47,16 @@ const MovieReducer = (state, action) => {
             return {
                 ...state,
                 errorMsg: action.payload
+            };
+        case 'SET_TOTAL_MOVIES':
+            return {
+                ...state,
+                totalMovies: action.payload
+            };
+        case 'SET_CURRENT_PAGE':
+            return {
+                ...state,
+                currentPage: action.payload
             };
         default:
             return state;

@@ -15,7 +15,7 @@ function App() {
       <Routes>
         {/* <Navbar></Navbar> */}
 
-        <Route path="/" element={<Home />} />
+        <Route path="/:search/:filter?" element={<Home />} />
 
         <Route
           path="/Details/:id"
