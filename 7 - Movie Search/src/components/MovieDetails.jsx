@@ -56,9 +56,9 @@ const MovieDetails = ({ apiKey }) => {
 
   return (
     <div className="relative min-h-screen bg-gray-950 text-white overflow-hidden py-32 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
-      
+
       {/* Blurred Background Image */}
-      <div 
+      <div
         className="absolute inset-0 z-0 opacity-20 bg-cover bg-center blur-3xl scale-110"
         style={{ backgroundImage: `url(${movie.Poster !== "N/A" ? movie.Poster : 'https://placehold.co/300x450?text=No+Poster+Available'})` }}
       ></div>
@@ -66,12 +66,12 @@ const MovieDetails = ({ apiKey }) => {
 
       {/* Main Content Container */}
       <div className="relative z-10 max-w-6xl w-full mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start">
-        
+
         {/* Left Column: Poster */}
         <div className="md:col-span-4 lg:col-span-3 flex justify-center md:justify-start">
           <div className="w-full max-w-[300px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-gray-900">
-            <img 
-              src={movie.Poster !== "N/A" ? movie.Poster : 'https://placehold.co/300x450?text=No+Poster+Available'} 
+            <img
+              src={movie.Poster !== "N/A" ? movie.Poster : 'https://placehold.co/300x450?text=No+Poster+Available'}
               alt={`${movie.Title} Poster`}
               className="w-full h-auto object-cover"
             />
@@ -80,7 +80,7 @@ const MovieDetails = ({ apiKey }) => {
 
         {/* Right Column: Details */}
         <div className="md:col-span-8 lg:col-span-9 flex flex-col space-y-6">
-          
+
           {/* Header Area */}
           <div>
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-2 drop-shadow-md">
@@ -92,14 +92,20 @@ const MovieDetails = ({ apiKey }) => {
               <span className="px-2 py-0.5 border border-gray-600 rounded-md text-xs tracking-wider">{movie.Rated}</span>
               <span className="w-1.5 h-1.5 rounded-full bg-gray-500"></span>
               <span>{movie.Runtime}</span>
+              {movie.totalSeasons && (
+                <>
+                  <span className="w-1.5 h-1.5 rounded-full bg-gray-500"></span>
+                  <span>{movie.totalSeasons} {movie.totalSeasons === 1 ? "season" : "seasons"}</span>
+                </>
+              )}
             </div>
           </div>
 
           {/* Genre Badges */}
           <div className="flex flex-wrap gap-2">
             {genres.map((genre, index) => (
-              <span 
-                key={index} 
+              <span
+                key={index}
                 className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-xs font-semibold uppercase tracking-wider text-gray-200"
               >
                 {genre}
@@ -132,7 +138,7 @@ const MovieDetails = ({ apiKey }) => {
               <p className="text-gray-400 text-sm uppercase tracking-wider font-semibold mb-1">Language</p>
               <p className="text-gray-100">{movie.Language}</p>
             </div>
-            
+
           </div>
 
           {/* Ratings Section */}

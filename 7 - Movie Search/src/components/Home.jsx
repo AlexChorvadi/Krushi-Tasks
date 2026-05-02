@@ -5,7 +5,6 @@ import { useMovies } from "../MovieContext.jsx";
 
 export default function Home() {
   const { state, dispatch } = useMovies();
-  const { search, filter } = useParams();
   const navigate = useNavigate();
   const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
   const moviesPerPage = 10;
@@ -16,12 +15,11 @@ export default function Home() {
   useEffect(() => {
     let currentPage = state.currentPage || 1;
     setCurrentPage(currentPage);
-    //alert(currentPage);
   }, [state.MoviesList]);
 
   useEffect(() => {
 
-    if(search === undefined) {
+    if(state.query === undefined) {
       dispatch({ type: "ADD_MOVIE", payload: [] });
       dispatch({ type: "SET_TOTAL_MOVIES", payload: 0 });
       return;
@@ -30,11 +28,11 @@ export default function Home() {
     dispatch({ type: "SET_LOADING", payload: true });
     dispatch({ type: "SET_CURRENT_PAGE", payload: currentPage });
 
-    let apiUrl = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${search}`;
+    let apiUrl = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${state.query}`;
 
     // Add type only if selected
-    if (filter) {
-      apiUrl += `&type=${filter}`;
+    if (state.filter) {
+      apiUrl += `&type=${state.filter}`;
     }
 
     fetch(

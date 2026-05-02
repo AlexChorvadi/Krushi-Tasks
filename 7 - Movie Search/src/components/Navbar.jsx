@@ -17,6 +17,8 @@ export default function Navbar() {
 
     dispatch({ type: "SET_LOADING", payload: true });
     dispatch({ type: "SET_CURRENT_PAGE", payload: 1 });
+    dispatch({ type: "SET_QUERY", payload: query });
+    dispatch({ type: "SET_FILTER", payload: filter });
 
     // Dynamic API URL
     let apiUrl = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`;
@@ -41,8 +43,8 @@ export default function Navbar() {
           dispatch({ type: "SET_TOTAL_MOVIES", payload: data.totalResults });
         }
 
-        navigate(`/${query}/${filter}`); // Navigate with search and filter as params
       });
+      navigate(`/`); // Navigate with search and filter as params
   };
 
   return (

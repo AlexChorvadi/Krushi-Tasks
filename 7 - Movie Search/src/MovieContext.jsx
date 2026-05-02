@@ -7,8 +7,8 @@ const initialState = {
     currentPage: 1,
     isLoading: false,
     errorMsg: null,
-    FavMovies:[],
-    IMDBID:null
+    FavMovies: [],
+    IMDBID: null
 }
 
 const MovieReducer = (state, action) => {
@@ -36,12 +36,12 @@ const MovieReducer = (state, action) => {
         case 'SET_IMDB':
             return {
                 ...state,
-                IMDBID:action.payload
+                IMDBID: action.payload
             };
         case 'SET_LOADING':
             return {
                 ...state,
-                isLoading:action.payload
+                isLoading: action.payload
             };
         case 'SET_ERROR_MSG':
             return {
@@ -58,19 +58,29 @@ const MovieReducer = (state, action) => {
                 ...state,
                 currentPage: action.payload
             };
+        case 'SET_QUERY':
+            return {
+                ...state,
+                query: action.payload
+            };
+        case 'SET_FILTER':
+            return {
+                ...state,
+                filter: action.payload
+            };
         default:
             return state;
     }
 };
 
 export function MoviesProvider({ children }) {
-  const [state, dispatch] = useReducer(MovieReducer, initialState);
+    const [state, dispatch] = useReducer(MovieReducer, initialState);
 
-  return (
-    <MovieContext.Provider value={{ state, dispatch }}>
-      {children}
-    </MovieContext.Provider>
-  );
+    return (
+        <MovieContext.Provider value={{ state, dispatch }}>
+            {children}
+        </MovieContext.Provider>
+    );
 }
 
 export const useMovies = () => useContext(MovieContext);
