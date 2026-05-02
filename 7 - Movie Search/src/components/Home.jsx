@@ -59,7 +59,7 @@ export default function Home() {
 
   return (
     <div className="bg-[#050505] min-h-screen text-white">
-      <div className="pt-24 px-4 sm:px-6 md:px-10 pb-10">
+      <div className="pt-32 px-4 sm:pt-24 sm:px-6 md:px-10 pb-10">
         {/* Loading State */}
         {state.isLoading && (
           <div className="flex items-center justify-center min-h-[60vh]">
