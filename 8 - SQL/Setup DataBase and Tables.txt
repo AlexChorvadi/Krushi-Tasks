@@ -1,0 +1,80 @@
+CREATE DATABASE ecommerce
+
+use ecommerce
+CREATE TABLE customers(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(150),
+    email VARCHAR(150),
+    address VARCHAR(150)
+);
+
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT,
+    order_date DATE,
+    total_amount DECIMAL(10, 2),
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+);
+
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    price DECIMAL(10, 2),
+    description TEXT
+);
+
+INSERT INTO customers (name, email, address) VALUES
+('David Lee', 'david.lee@example.com', '321 Cedar Ln, Austin'),
+('Emma Wilson', 'emma.w@example.com', '654 Birch St, Seattle'),
+('Frank Miller', 'frank.m@example.com', '987 Walnut Dr, Denver'),
+('Grace Taylor', 'grace.t@example.com', '147 Cherry Blvd, Miami'),
+('Henry Anderson', 'henry.a@example.com', '258 Spruce Ct, Boston'),
+('Ivy Martinez', 'ivy.m@example.com', '369 Ash Ave, Chicago'),
+('Jack Robinson', 'jack.r@example.com', '741 Poplar Way, Dallas'),
+('Karen Clark', 'karen.c@example.com', '852 Fir Pl, Atlanta'),
+('Leo Rodriguez', 'leo.r@example.com', '963 Elm St, Phoenix'),
+('Mia Lewis', 'mia.l@example.com', '159 Cypress Rd, Portland');
+
+INSERT INTO products (name, price, description) VALUES
+('27-inch 4K Monitor', 349.99, 'Ultra HD monitor with excellent color accuracy.'),
+('Noise-Cancelling Headphones', 199.50, 'Over-ear headphones with active noise cancellation.'),
+('USB-C Hub', 45.00, '7-in-1 multi-port adapter for modern laptops.'),
+('Ergonomic Office Chair', 249.99, 'Adjustable desk chair with premium lumbar support.'),
+('HD Webcam', 79.99, '1080p web camera with built-in microphone and privacy shutter.'),
+('Wireless Charger', 25.50, 'Fast-charging pad compatible with all Qi-enabled devices.'),
+('Bluetooth Speaker', 59.99, 'Portable waterproof speaker with rich bass.'),
+('Tablet Pro', 649.00, '11-inch display tablet with stylus support.'),
+('External Hard Drive', 119.99, '2TB portable HDD for fast data backups.'),
+('Gaming Mousepad', 15.00, 'Extra-large extended surface for precise tracking.');
+
+INSERT INTO orders (customer_id, order_date, total_amount) VALUES
+(4, '2023-01-15', 349.99),  -- David bought a Monitor
+(5, '2023-02-10', 199.50),  -- Emma bought Headphones
+(6, '2023-03-05', 45.00),   -- Frank bought a USB Hub
+(7, '2023-04-20', 249.99),  -- Grace bought an Office Chair
+(8, '2023-05-12', 79.99),   -- Henry bought a Webcam
+(9, '2023-06-18', 25.50),   -- Ivy bought a Wireless Charger
+(10, '2023-07-22', 59.99),  -- Jack bought a Speaker
+(1, '2023-08-30', 649.00),  -- Alice bought a Tablet Pro
+(2, '2023-09-14', 119.99),  -- Bob bought a Hard Drive
+(3, '2023-10-01', 15.00),   -- Charlie bought a Mousepad
+(4, '2023-10-05', 699.98),  -- David came back and bought 2 Monitors
+(5, '2023-10-10', 244.50),  -- Emma bought Headphones and a USB Hub
+(8, '2023-11-02', 105.49),  -- Henry bought a Webcam and Charger
+(9, '2023-11-15', 649.00),  -- Ivy bought a Tablet Pro
+(10, '2023-11-20', 134.99); -- Jack bought a Speaker and Webcam
+
+CREATE TABLE order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+INSERT INTO order_items (order_id, product_id, quantity) VALUES
+(1, 1, 1), -- Order 1 (Alice): 1x Laptop Pro (ID 1)
+(1, 2, 1), -- Order 1 (Alice): 1x Wireless Mouse (ID 2)
+(2, 3, 1), -- Order 2 (Bob): 1x Mechanical Keyboard (ID 3)
+(3, 2, 1), -- Order 3 (Alice): 1x Wireless Mouse (ID 2)
+(4, 1, 1); -- Order 4 (Charlie): 1x Laptop Pro (ID 1)
