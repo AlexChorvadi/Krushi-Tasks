@@ -1,5 +1,11 @@
-Q1 - Find all the topics and tasks which are thought in the month of October
+// Database: ZenClass
+use ZenClass;
 
+/**
+ * Task 1: Find all the topics and tasks which are taught in the month of October.
+ * Logic: Filters both collections using the $gte and $lte operators to capture the full range of October 2020.
+ */
+// Find Topics in October
 db.topics.find({
   date: {
     $gte: ISODate("2020-10-01T00:00:00Z"),
@@ -7,6 +13,7 @@ db.topics.find({
   }
 });
 
+// Find Tasks in October
 db.tasks.find({
   submitted_date: {
     $gte: ISODate("2020-10-01T00:00:00Z"),
@@ -14,8 +21,10 @@ db.tasks.find({
   }
 });
 
-Q2 - Find all the company drives which appeared between 15 oct-2020 and 31-oct-2020
-
+/**
+ * Task 2: Find all the company drives which appeared between 15-Oct-2020 and 31-Oct-2020.
+ * Logic: Uses comparison operators on the date field to find drives within a specific two-week window.
+ */
 db.company_drives.find({
   date: {
     $gte: ISODate("2020-10-15T00:00:00Z"),
@@ -23,30 +32,33 @@ db.company_drives.find({
   }
 });
 
-Q3 - Find all the company drives and students who are appeared for the placement.
-
+/**
+ * Task 3: Find all the company drives and students who appeared for the placement.
+ * Logic: Performs a $lookup (left outer join) between company_drives and users based on student IDs.
+ */
 db.company_drives.aggregate([
   {
     $lookup: {
-      from: "users",           // The collection to join with
-      localField: "students_attended", // Field from company_drives
-      foreignField: "user_id",  // Field from users
-      as: "appeared_students"  // The name of the new array field
+      from: "users",
+      localField: "students_attended",
+      foreignField: "user_id",
+      as: "appeared_students"
     }
   },
   {
     $project: {
-      _id: 0,                  // Hide the MongoDB ID
-      company_name: 1,         // Show company name
-      date: 1,                 // Show drive date
-      "appeared_students.name": 1, // Show only student names
-      "appeared_students.email": 1 // Show student email for clarity
+      _id: 0,
+      company_name: 1,
+      date: 1,
+      "appeared_students.name": 1
     }
   }
 ]);
 
-Q4 - Find the number of problems solved by the user in codekata
-
+/**
+ * Task 4: Find the number of problems solved by the user in Codekata.
+ * Logic: Joins users with codekata and projects the solved count, defaulting to 0 if no record exists.
+ */
 db.users.aggregate([
   {
     $lookup: {
@@ -67,18 +79,20 @@ db.users.aggregate([
   }
 ]);
 
-Q5 - Find all the mentors with who has the mentee's count more than 15
+/**
+ * Task 5: Find all the mentors who have a mentee count greater than 15.
+ * Logic: Uses the $gt (Greater Than) operator to filter the mentors collection.
+ */
+db.mentors.find({
+  mentee_count: { $gt: 15 }
+});
 
-db.mentors.find(
-  { mentee_count: { $gt: 15 } }, // Filter
-  { _id: 0, mentor_name: 1, mentee_count: 1 } // Projection
-);
-
-Q6 - Find the number of users who are absent and task is not submitted  between 15 oct-2020 and 31-oct-2020
-
+/**
+ * Task 6: Find the number of users who are absent and whose task is not submitted between 15-Oct-2020 and 31-Oct-2020.
+ * Logic: An aggregation pipeline that filters for absentees, looks up their tasks, and matches those without a "Submitted" status.
+ */
 db.attendance.aggregate([
   {
-    // 1. Filter for Absent records within the date range
     $match: {
       status: "Absent",
       date: {
@@ -88,7 +102,6 @@ db.attendance.aggregate([
     }
   },
   {
-    // 2. Join with the tasks collection
     $lookup: {
       from: "tasks",
       localField: "user_id",
@@ -97,7 +110,6 @@ db.attendance.aggregate([
     }
   },
   {
-    // 3. Filter for users whose tasks are either empty or not "Submitted"
     $match: {
       $or: [
         { "user_tasks": { $size: 0 } }, 
@@ -106,7 +118,6 @@ db.attendance.aggregate([
     }
   },
   {
-    // 4. Count the final results
     $count: "absent_and_no_task_count"
   }
 ]);
