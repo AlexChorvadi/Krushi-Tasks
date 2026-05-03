@@ -1,0 +1,48 @@
+{
+  "mongodb_complete_reference": [
+    {
+      "type": "Comparison Operators",
+      "items": [
+        { "operator": "$eq", "full_name": "Equals", "what_it_does": "Matches values that are exactly equal to a specified value." },
+        { "operator": "$ne", "full_name": "Not Equal", "what_it_does": "Matches all values that are not equal to a specified value." },
+        { "operator": "$gt", "full_name": "Greater Than", "what_it_does": "Matches values that are strictly greater than a specified value." },
+        { "operator": "$gte", "full_name": "Greater Than or Equals", "what_it_does": "Matches values that are greater than or equal to a specified value." },
+        { "operator": "$lt", "full_name": "Less Than", "what_it_does": "Matches values that are strictly less than a specified value." },
+        { "operator": "$lte", "full_name": "Less Than or Equals", "what_it_does": "Matches values that are less than or equal to a specified value." },
+        { "operator": "$in", "full_name": "In Array", "what_it_does": "Matches any of the values specified in an array." },
+        { "operator": "$nin", "full_name": "Not In Array", "what_it_does": "Matches none of the values specified in an array." }
+      ]
+    },
+    {
+      "type": "Logical Operators",
+      "items": [
+        { "operator": "$or", "full_name": "Logical OR", "what_it_does": "Returns documents that satisfy at least one of the specified conditions." },
+        { "operator": "$and", "full_name": "Logical AND", "what_it_does": "Returns documents that satisfy all the specified conditions." },
+        { "operator": "$not", "full_name": "Logical NOT", "what_it_does": "Inverts the effect of a query filter and returns documents that do not match." },
+        { "operator": "$nor", "full_name": "Logical NOR", "what_it_does": "Returns documents that fail all the specified conditions." }
+      ]
+    },
+    {
+      "type": "Aggregation Stages",
+      "items": [
+        { "stage": "$match", "full_name": "Filter Stage", "what_it_does": "Filters the documents to pass only matching documents to the next stage." },
+        { "stage": "$lookup", "full_name": "Join Stage", "what_it_does": "Performs a left outer join to another collection to pull in related data." },
+        { "stage": "$project", "full_name": "Reshape Stage", "what_it_does": "Selects, adds, or renames fields in the output documents." },
+        { "stage": "$group", "full_name": "Grouping Stage", "what_it_does": "Groups documents by an ID and applies calculations (sum, avg, etc.)." },
+        { "stage": "$unwind", "full_name": "Deconstruct Array", "what_it_does": "Breaks an array field into individual documents for each element." },
+        { "stage": "$sort", "full_name": "Sorting Stage", "what_it_does": "Orders documents (1 for ascending, -1 for descending)." },
+        { "stage": "$limit", "full_name": "Limit Stage", "what_it_does": "Restricts the number of documents passed to the next stage." },
+        { "stage": "$count", "full_name": "Count Stage", "what_it_does": "Returns a document containing the count of the filtered results." }
+      ]
+    },
+    {
+      "type": "Utility & Element Operators",
+      "items": [
+        { "tool": "ISODate()", "full_name": "Date Wrapper", "what_it_does": "Converts a date string into a searchable Date object." },
+        { "tool": "$size", "full_name": "Array Size", "what_it_does": "Returns the number of elements in an array." },
+        { "tool": "$ifNull", "full_name": "Null Safety", "what_it_does": "Provides a replacement value if a field is null or missing." },
+        { "tool": "$exists", "full_name": "Field Existence", "what_it_does": "Checks if a specific field exists in the document." }
+      ]
+    }
+  ]
+}

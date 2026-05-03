@@ -1,0 +1,112 @@
+Q1 - Find all the topics and tasks which are thought in the month of October
+
+db.topics.find({
+  date: {
+    $gte: ISODate("2020-10-01T00:00:00Z"),
+    $lte: ISODate("2020-10-31T23:59:59Z")
+  }
+});
+
+db.tasks.find({
+  submitted_date: {
+    $gte: ISODate("2020-10-01T00:00:00Z"),
+    $lte: ISODate("2020-10-31T23:59:59Z")
+  }
+});
+
+Q2 - Find all the company drives which appeared between 15 oct-2020 and 31-oct-2020
+
+db.company_drives.find({
+  date: {
+    $gte: ISODate("2020-10-15T00:00:00Z"),
+    $lte: ISODate("2020-10-31T23:59:59Z")
+  }
+});
+
+Q3 - Find all the company drives and students who are appeared for the placement.
+
+db.company_drives.aggregate([
+  {
+    $lookup: {
+      from: "users",           // The collection to join with
+      localField: "students_attended", // Field from company_drives
+      foreignField: "user_id",  // Field from users
+      as: "appeared_students"  // The name of the new array field
+    }
+  },
+  {
+    $project: {
+      _id: 0,                  // Hide the MongoDB ID
+      company_name: 1,         // Show company name
+      date: 1,                 // Show drive date
+      "appeared_students.name": 1, // Show only student names
+      "appeared_students.email": 1 // Show student email for clarity
+    }
+  }
+]);
+
+Q4 - Find the number of problems solved by the user in codekata
+
+db.users.aggregate([
+  {
+    $lookup: {
+      from: "codekata",
+      localField: "user_id",
+      foreignField: "user_id",
+      as: "stats"
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      name: 1,
+      total_problems_solved: { 
+        $ifNull: [{ $arrayElemAt: ["$stats.problems_solved", 0] }, 0] 
+      }
+    }
+  }
+]);
+
+Q5 - Find all the mentors with who has the mentee's count more than 15
+
+db.mentors.find(
+  { mentee_count: { $gt: 15 } }, // Filter
+  { _id: 0, mentor_name: 1, mentee_count: 1 } // Projection
+);
+
+Q6 - Find the number of users who are absent and task is not submitted  between 15 oct-2020 and 31-oct-2020
+
+db.attendance.aggregate([
+  {
+    // 1. Filter for Absent records within the date range
+    $match: {
+      status: "Absent",
+      date: {
+        $gte: ISODate("2020-10-15T00:00:00Z"),
+        $lte: ISODate("2020-10-31T23:59:59Z")
+      }
+    }
+  },
+  {
+    // 2. Join with the tasks collection
+    $lookup: {
+      from: "tasks",
+      localField: "user_id",
+      foreignField: "user_id",
+      as: "user_tasks"
+    }
+  },
+  {
+    // 3. Filter for users whose tasks are either empty or not "Submitted"
+    $match: {
+      $or: [
+        { "user_tasks": { $size: 0 } }, 
+        { "user_tasks.status": { $ne: "Submitted" } }
+      ]
+    }
+  },
+  {
+    // 4. Count the final results
+    $count: "absent_and_no_task_count"
+  }
+]);
