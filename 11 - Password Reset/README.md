@@ -1,6 +1,6 @@
 # Password Reset Web Application
 
-A full-stack web application for secure password reset functionality using React, Vite, Node.js, Express, and Nodemailer for email verification.
+A full-stack web application for secure password reset functionality using React, Vite, Node.js, Express, and Resend for email verification.
 
 ## 🎯 Features
 
@@ -10,7 +10,7 @@ A full-stack web application for secure password reset functionality using React
 - Responsive UI built with React and Vite
 - RESTful API backend with Express.js
 - MongoDB database integration
-- Email notifications using Nodemailer
+- Email notifications using Resend
 
 ## 🛠️ Tech Stack
 
@@ -23,7 +23,7 @@ A full-stack web application for secure password reset functionality using React
 - **Node.js** - JavaScript runtime
 - **Express.js** - Web framework
 - **MongoDB** - Database
-- **Nodemailer** - Email service
+- **Resend** - Email service
 - **Mongoose** - MongoDB ODM
 
 ## 📁 Project Structure
@@ -72,6 +72,7 @@ PORT=3000
 FRONTEND_URL=http://localhost:5173
 EMAIL=your-email@gmail.com
 EMAIL_PASS=your-email-password-or-app-password
+RESEND_API_KEY=resend-api
 ```
 
 **Note:** For Gmail, use an [App Password](https://support.google.com/accounts/answer/185833) instead of your regular password.
@@ -209,7 +210,7 @@ Content-Type: application/json
 
 ## 📧 Email Configuration
 
-The application uses Nodemailer to send password reset emails. Ensure you have:
+The application uses RESEND to send password reset emails. Ensure you have:
 
 - Valid email service configured (Gmail, SendGrid, etc.)
 - Email credentials stored securely in `.env`
