@@ -101,6 +101,8 @@ const forgot = async (req, res) => {
         user.resetTokenExpire = Date.now() + 10 * 60 * 1000;
         await user.save();
 
+        console.log("BEFORE forgot SEND");
+
         // Implement forgot password logic here
         const mailOptions = {
             from: process.env.EMAIL,
@@ -110,6 +112,7 @@ const forgot = async (req, res) => {
             html: `Please click on the <a href="${process.env.FRONTEND_URL}/verify-token">link</a> use this key: <b>${token}</b> to reset your password.`
         };
         await transporter.sendMail(mailOptions);
+        console.log("AFTER forgot SEND");
 
         res.status(200).json(user);
     } catch (error) {
