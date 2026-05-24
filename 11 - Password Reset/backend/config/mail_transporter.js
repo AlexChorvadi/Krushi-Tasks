@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-console.log("MAIL FILE LOADED");
+console.log("MAIL FILE LOADED", process.env.EMAIL_PASS, process.env.EMAIL);
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
