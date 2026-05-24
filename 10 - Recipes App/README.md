@@ -141,6 +141,3 @@ curl -X DELETE http://localhost:3000/api/recipes/delete/<id>
 
 ## Contributing
 Feel free to open issues or create pull requests for improvements. Add tests and update documentation when changing APIs.
-
-## License
-Add a license as needed.
