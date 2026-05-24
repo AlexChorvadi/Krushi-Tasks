@@ -2,6 +2,16 @@ const auth = require('../models/authModel');
 const bcrypt = require("bcryptjs");
 const transporter = require('../config/mail_transporter');
 
+transporter.verify((error, success) => {
+
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("SMTP Server Ready");
+  }
+
+});
+
 const register = async (req, res) => {
     try {
 
