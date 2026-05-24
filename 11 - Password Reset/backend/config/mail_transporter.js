@@ -1,26 +1,30 @@
 const nodemailer = require("nodemailer");
 
-console.log("MAIL FILE LOADED", process.env.EMAIL_PASS, process.env.EMAIL);
+console.log("BEFORE TRANSPORT");
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
+  service: "gmail",
 
   auth: {
     user: process.env.EMAIL,
     pass: process.env.EMAIL_PASS,
   },
 
+  family: 4,
+
   connectionTimeout: 10000,
   greetingTimeout: 10000,
   socketTimeout: 10000,
 });
 
+console.log("AFTER TRANSPORT");
+
 transporter.verify((error, success) => {
-  console.log("VERIFY RUNNING");
+
+  console.log("VERIFY CALLBACK");
+
   if (error) {
-    console.log(error);
+    console.log("VERIFY ERROR:", error);
   } else {
     console.log("SMTP READY");
   }
