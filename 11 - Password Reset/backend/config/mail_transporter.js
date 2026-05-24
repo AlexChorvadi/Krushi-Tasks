@@ -1,5 +1,7 @@
 const nodemailer = require("nodemailer");
 
+console.log("MAIL FILE LOADED");
+
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
@@ -9,10 +11,14 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL,
     pass: process.env.EMAIL_PASS,
   },
+
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000,
 });
 
 transporter.verify((error, success) => {
-
+  console.log("VERIFY RUNNING");
   if (error) {
     console.log(error);
   } else {
