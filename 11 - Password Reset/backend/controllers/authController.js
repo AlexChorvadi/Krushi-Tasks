@@ -1,6 +1,6 @@
 const auth = require('../models/authModel');
 const bcrypt = require("bcryptjs");
-// const transporter = require('../config/mail_transporter');
+const transporter = require('../config/mail_transporter');
 const { Resend } = require("resend");
 
 
@@ -21,28 +21,28 @@ const register = async (req, res) => {
             password: hashedPassword
         });
 
-        resend.emails.send({
-            from: 'onboarding@resend.dev',
-            to: newAuth.email,
-            subject: 'Registration Successful',
-            html: `
-                <h2>Welcome, ${newAuth.name}!</h2>
-                <p>You have successfully registered.</p>
-            `
-        });
-
-        // SEND WELCOME EMAIL
-        // const mailOptions = {
-        //     from: process.env.EMAIL,
+        // resend.emails.send({
+        //     from: 'onboarding@resend.dev',
         //     to: newAuth.email,
-        //     subject: "Registration Successful",
+        //     subject: 'Registration Successful',
         //     html: `
         //         <h2>Welcome, ${newAuth.name}!</h2>
         //         <p>You have successfully registered.</p>
         //     `
-        // };
+        // });
 
-        // await transporter.sendMail(mailOptions);
+        // SEND WELCOME EMAIL
+        const mailOptions = {
+            from: process.env.EMAIL,
+            to: newAuth.email,
+            subject: "Registration Successful",
+            html: `
+                <h2>Welcome, ${newAuth.name}!</h2>
+                <p>You have successfully registered.</p>
+            `
+        };
+
+        await transporter.sendMail(mailOptions);
 
         return res.status(201).json({
             success: true,
@@ -116,24 +116,24 @@ const forgot = async (req, res) => {
         user.resetTokenExpire = Date.now() + 10 * 60 * 1000;
         await user.save();
 
-        resend.emails.send({
-            from: process.env.EMAIL,
-            to: user.email,
-            subject: 'Password Reset',
-            html: `Please click on the <a href="${process.env.FRONTEND_URL}/verify-token">link</a> use this key: <b>${token}</b> to reset your password.`
-        });
+        // resend.emails.send({
+        //     from: process.env.EMAIL,
+        //     to: user.email,
+        //     subject: 'Password Reset',
+        //     html: `Please click on the <a href="${process.env.FRONTEND_URL}/verify-token">link</a> use this key: <b>${token}</b> to reset your password.`
+        // });
 
         // console.log("BEFORE forgot SEND");
 
         // Implement forgot password logic here
-        // const mailOptions = {
-        //     from: process.env.EMAIL,
-        //     to: user.email,
-        //     subject: 'Password Reset',
-        //     text: `You have requested a password reset.`,
-        //     html: `Please click on the <a href="${process.env.FRONTEND_URL}/verify-token">link</a> use this key: <b>${token}</b> to reset your password.`
-        // };
-        // await transporter.sendMail(mailOptions);
+        const mailOptions = {
+            from: process.env.EMAIL,
+            to: user.email,
+            subject: 'Password Reset',
+            text: `You have requested a password reset.`,
+            html: `Please click on the <a href="${process.env.FRONTEND_URL}/verify-token">link</a> use this key: <b>${token}</b> to reset your password.`
+        };
+        await transporter.sendMail(mailOptions);
         // console.log("AFTER forgot SEND");
 
         res.status(200).json(user);
@@ -222,23 +222,23 @@ const resetPassword = async (req, res) => {
 
         await user.save();
 
-        resend.emails.send({
-            from: process.env.EMAIL,
-            to: user.email,
-            subject: 'Password Reset',
-            html: `
-                <h2>Password Reset Successful</h2>
-                <p>You have successfully reset your password.</p>
-            `
-        });
-        // const mailOptions = {
+        // resend.emails.send({
         //     from: process.env.EMAIL,
         //     to: user.email,
         //     subject: 'Password Reset',
-        //     text: `You have successfully reset your password.`,
-        //     html: `Please click on the <a href="${process.env.FRONTEND_URL}/login">Login</a>.`
-        // };
-        // await transporter.sendMail(mailOptions);
+        //     html: `
+        //         <h2>Password Reset Successful</h2>
+        //         <p>You have successfully reset your password.</p>
+        //     `
+        // });
+        const mailOptions = {
+            from: process.env.EMAIL,
+            to: user.email,
+            subject: 'Password Reset',
+            text: `You have successfully reset your password.`,
+            html: `Please click on the <a href="${process.env.FRONTEND_URL}/login">Login</a>.`
+        };
+        await transporter.sendMail(mailOptions);
 
         return res.status(200).json({
             success: true,
