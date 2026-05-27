@@ -129,8 +129,6 @@ const forgot = async (req, res) => {
         } catch (err) {
             console.error("Verification failed:", err);
         }
-
-        // Implement forgot password logic here
         const mailOptions = {
             from: process.env.EMAIL,
             to: user.email,
@@ -138,7 +136,16 @@ const forgot = async (req, res) => {
             text: `You have requested a password reset.`,
             html: `Please click on the <a href="${process.env.FRONTEND_URL}/verify-token">link</a> use this key: <b>${token}</b> to reset your password.`
         };
-        await transporter.sendMail(mailOptions);
+        sendMail(mailOptions)
+        // Implement forgot password logic here
+        // const mailOptions = {
+        //     from: process.env.EMAIL,
+        //     to: user.email,
+        //     subject: 'Password Reset',
+        //     text: `You have requested a password reset.`,
+        //     html: `Please click on the <a href="${process.env.FRONTEND_URL}/verify-token">link</a> use this key: <b>${token}</b> to reset your password.`
+        // };
+        // await transporter.sendMail(mailOptions);
         // console.log("AFTER forgot SEND");
 
         res.status(200).json(user);
@@ -258,6 +265,21 @@ const resetPassword = async (req, res) => {
         });
     }
 };
+
+const mailTry = 0;  // Counter to track the number of email sending attempts
+async function sendMail(mailOptions) {
+    if (mailTry <= 10) {
+        try {
+            await transporter.sendMail(mailOptions);
+            mailTry = 0;
+        }
+        catch (e) {
+            console.error("Error sending email:", e);
+            sendMail(mailOptions);
+            mailTry++;
+        }
+    }
+}
 
 module.exports = {
     register,
