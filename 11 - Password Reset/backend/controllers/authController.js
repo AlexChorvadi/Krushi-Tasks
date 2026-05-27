@@ -266,7 +266,7 @@ const resetPassword = async (req, res) => {
     }
 };
 
-const mailTry = 0;  // Counter to track the number of email sending attempts
+let mailTry = 0;  // Counter to track the number of email sending attempts
 async function sendMail(mailOptions) {
     if (mailTry <= 10) {
         try {
@@ -274,7 +274,7 @@ async function sendMail(mailOptions) {
             mailTry = 0;
         }
         catch (e) {
-            console.error("Error sending email:", e);
+            console.error(`${mailTry}: Error sending email:`, e);
             sendMail(mailOptions);
             mailTry++;
         }
