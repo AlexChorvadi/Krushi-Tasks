@@ -14,15 +14,4 @@ const transporter = nodemailer.createTransport({
   socketTimeout: 10000,
 });
 
-async function verifyTransporter() {
-  try {
-    await transporter.verify();
-    console.log("Server is ready to take our messages");
-  } catch (err) {
-    console.error("Verification failed:", err);
-  }
-}
-
-verifyTransporter();
-
 module.exports = transporter;

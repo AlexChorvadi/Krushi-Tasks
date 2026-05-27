@@ -123,7 +123,12 @@ const forgot = async (req, res) => {
         //     html: `Please click on the <a href="${process.env.FRONTEND_URL}/verify-token">link</a> use this key: <b>${token}</b> to reset your password.`
         // });
 
-        // console.log("BEFORE forgot SEND");
+        try {
+            await transporter.verify();
+            console.log("Server is ready to take our messages");
+        } catch (err) {
+            console.error("Verification failed:", err);
+        }
 
         // Implement forgot password logic here
         const mailOptions = {
