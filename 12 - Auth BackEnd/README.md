@@ -167,6 +167,32 @@ curl -X POST http://localhost:3000/api/login \
    }
    ```
 
+## Live Test Cases
+
+### 1) Register User
+
+```bash
+curl -X POST https://api-jwt-auth-q98v.onrender.com/api/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Chorvadi Krushi",
+    "email": "admin@gmail.com",
+    "password": "123456",
+    "gender": "Male",
+    "hobby": "Reading, Coding, Travel"
+  }'
+```
+
+### 2) Login User
+
+```bash
+curl -X POST https://api-jwt-auth-q98v.onrender.com/api/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "admin@gmail.com",
+    "password": "123456"
+  }'
+
 ## Notes
 
 - The JWT token returned from login is used by the frontend to protect the `/home` route.
