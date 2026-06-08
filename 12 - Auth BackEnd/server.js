@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-    res.send("Welcome to the Recipes API");
+    res.send("Please Login Or Register to access the API");
 });
 
 app.use("/api", authRoutes);
