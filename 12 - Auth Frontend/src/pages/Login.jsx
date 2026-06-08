@@ -35,7 +35,7 @@ export default function Login() {
         password: "",
       });
 
-      navigate("/home");
+      navigate("/profile");
 
     } catch (error) {
       console.log(error);

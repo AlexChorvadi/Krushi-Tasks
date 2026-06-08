@@ -192,7 +192,17 @@ curl -X POST https://api-jwt-auth-q98v.onrender.com/api/login \
     "email": "admin@gmail.com",
     "password": "123456"
   }'
+```
 
+### 3) Get Profile using Token
+
+```bash
+postman request 'http://api-jwt-auth-q98v.onrender.com/api/profile' \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer token' \
+  --body '' \
+  --auth-bearer-token 'token'
+```
 ## Notes
 
 - The JWT token returned from login is used by the frontend to protect the `/home` route.

@@ -4,14 +4,14 @@ This is the frontend part of the authentication project. It provides three main 
 
 - `/login` — user login page
 - `/register` — user registration page
-- `/home` — protected dashboard page available only when a valid JWT token exists
+- `/profile` — protected dashboard page available only when a valid JWT token exists
 
 ## Features
 
 - User registration
 - User login
 - JWT token storage in `localStorage`
-- Protected route for `/home`
+- Protected route for `/profile`
 - Redirect to login if the token is missing
 
 ## Tech Stack
@@ -35,7 +35,7 @@ This is the frontend part of the authentication project. It provides three main 
 |------|-------------|--------|
 | `/login` | Login page | Public |
 | `/register` | Registration page | Public |
-| `/home` | Protected home page | Private (JWT required) |
+| `/profile` | Protected home page | Private (JWT required) |
 
 ## Authentication Flow
 
@@ -43,7 +43,7 @@ This is the frontend part of the authentication project. It provides three main 
 2. User logs in on `/login`.
 3. On successful login, the backend returns an access token.
 4. The frontend stores the token in `localStorage`.
-5. The `/home` route checks for the token using `ProtectedRoutes.jsx`.
+5. The `/profile` route checks for the token using `ProtectedRoutes.jsx`.
 6. If no token is found, the user is redirected back to `/login`.
 
 ## Environment Variable

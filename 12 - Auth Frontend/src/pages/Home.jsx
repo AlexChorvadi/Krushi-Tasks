@@ -1,9 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Home() {
 
     const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+
 
     useEffect(() => {
 
@@ -13,9 +16,34 @@ export default function Home() {
             navigate("/login");
         }
 
-    }, []);
+        const getProfile = async () => {
+            try {
 
-    const user = JSON.parse(localStorage.getItem("user"));
+                const response = await axios.get(
+                    `${import.meta.env.VITE_API_BASE_URL}/profile`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    }
+                );
+
+                setUser(response.data.user);
+
+            } catch (error) {
+                console.log(error);
+
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+
+                navigate("/login");
+            }
+        };
+
+        getProfile();
+
+
+    }, []);
 
     const handleLogout = () => {
 
