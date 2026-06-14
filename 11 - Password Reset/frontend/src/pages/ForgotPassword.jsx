@@ -23,9 +23,7 @@ export default function ForgotPassword() {
 
       console.log(response.data);
 
-      setMessage(
-        `Password reset link sent to ${email}`
-      );
+      setMessage(`Password reset link sent to ${email}`);
 
       setEmail("");
 
@@ -34,12 +32,9 @@ export default function ForgotPassword() {
 
       console.log(error);
 
-      setMessage(
-        error.response?.data?.message || "Something went wrong"
-      );
+      setMessage(error.response?.data?.message || "Something went wrong");
 
     } finally {
-
       setLoading(false);
     }
   };

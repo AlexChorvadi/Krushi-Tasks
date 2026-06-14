@@ -70,9 +70,9 @@ VITE_API_BASE_URL=http://localhost:3000/api
 MONGO_URI=mongodb://username:password@localhost:27017/password-reset-db
 PORT=3000
 FRONTEND_URL=http://localhost:5173
-EMAIL=your-email@gmail.com
-EMAIL_PASS=your-email-password-or-app-password
-RESEND_API_KEY=resend-api
+BREVO_SMTP_KEY=your_BREVO_SMTP_KEY
+BREVO_API_KEY=your_BREVO_API_KEY
+BREVO_SENDER_EMAIL=your_BREVO_SENDER_EMAIL
 ```
 
 **Note:** For Gmail, use an [App Password](https://support.google.com/accounts/answer/185833) instead of your regular password.

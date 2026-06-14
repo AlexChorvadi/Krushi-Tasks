@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
 export default function Login() {
+
+  const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
     email: "",
@@ -26,16 +28,11 @@ export default function Login() {
         formData
       );
 
-      console.log(response.data);
-
-      setMessage(
-        `Login successful, ${response.data.name}!`
-      );
-
-      setFormData({
-        email: "",
-        password: "",
-      });
+      // console.log(response.data);
+      const jsonStr = JSON.stringify(response.data);
+      localStorage.setItem("data", jsonStr);
+      
+      navigate("/home")
 
     } catch (error) {
 

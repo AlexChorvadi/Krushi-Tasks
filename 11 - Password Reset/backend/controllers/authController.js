@@ -1,10 +1,10 @@
 const auth = require('../models/authModel');
 const bcrypt = require("bcryptjs");
-const transporter = require('../config/mail_transporter');
-const { Resend } = require("resend");
+const sendMail = require("../utils/sendMail");
+// const { Resend } = require("resend");
 
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// const resend = new Resend(process.env.RESEND_API_KEY);
 
 
 const register = async (req, res) => {
@@ -21,28 +21,25 @@ const register = async (req, res) => {
             password: hashedPassword
         });
 
-        // resend.emails.send({
-        //     from: 'onboarding@resend.dev',
-        //     to: newAuth.email,
-        //     subject: 'Registration Successful',
-        //     html: `
-        //         <h2>Welcome, ${newAuth.name}!</h2>
-        //         <p>You have successfully registered.</p>
-        //     `
-        // });
-
-        // SEND WELCOME EMAIL
-        const mailOptions = {
-            from: process.env.EMAIL,
+        await sendMail({
             to: newAuth.email,
-            subject: "Registration Successful",
+            to_name: newAuth.name,
+            subject: "Welcome to Authentication System",
+            text: "Your account has been created successfully.",
             html: `
-                <h2>Welcome, ${newAuth.name}!</h2>
-                <p>You have successfully registered.</p>
-            `
-        };
+                Hi ${newAuth.name},
 
-        await transporter.sendMail(mailOptions);
+                Welcome! 🎉
+
+                Your account has been created successfully, and you're now ready to get started.
+
+                We're excited to have you with us. You can now log in on our platform.
+
+                Thank you for joining us!
+
+                Best regards,
+            `,
+        });
 
         return res.status(201).json({
             success: true,
@@ -116,37 +113,28 @@ const forgot = async (req, res) => {
         user.resetTokenExpire = Date.now() + 10 * 60 * 1000;
         await user.save();
 
-        // resend.emails.send({
-        //     from: process.env.EMAIL,
-        //     to: user.email,
-        //     subject: 'Password Reset',
-        //     html: `Please click on the <a href="${process.env.FRONTEND_URL}/verify-token">link</a> use this key: <b>${token}</b> to reset your password.`
-        // });
+        console.log("Reset Token:", user.email);
 
-        try {
-            await transporter.verify();
-            console.log("Server is ready to take our messages");
-        } catch (err) {
-            console.error("Verification failed:", err);
-        }
-        const mailOptions = {
-            from: process.env.EMAIL,
+        await sendMail({
             to: user.email,
+            to_name: user.name,
             subject: 'Password Reset',
             text: `You have requested a password reset.`,
-            html: `Please click on the <a href="${process.env.FRONTEND_URL}/verify-token">link</a> use this key: <b>${token}</b> to reset your password.`
-        };
-        sendMail(mailOptions)
-        // Implement forgot password logic here
-        // const mailOptions = {
-        //     from: process.env.EMAIL,
-        //     to: user.email,
-        //     subject: 'Password Reset',
-        //     text: `You have requested a password reset.`,
-        //     html: `Please click on the <a href="${process.env.FRONTEND_URL}/verify-token">link</a> use this key: <b>${token}</b> to reset your password.`
-        // };
-        // await transporter.sendMail(mailOptions);
-        // console.log("AFTER forgot SEND");
+            html: `
+                <h2>Password Reset Request</h2>
+
+                <p>We received a request to reset your password.</p>
+
+                <p>
+                    Click
+                    <a href="${process.env.FRONTEND_URL}/verify-token">here</a>
+                    to continue, then enter the following verification code:
+                </p>
+
+                <p><b>${token}</b></p>
+
+                <p>If you didn't request a password reset, you can safely ignore this email.</p>`
+        });
 
         res.status(200).json(user);
     } catch (error) {
@@ -215,7 +203,7 @@ const resetPassword = async (req, res) => {
             email,
             resetTokenExpire: { $gt: Date.now() }
         });
-        console.log(user, resetToken, email);
+
         if (!user) {
             return res.status(400).json({
                 success: false,
@@ -234,23 +222,19 @@ const resetPassword = async (req, res) => {
 
         await user.save();
 
-        // resend.emails.send({
-        //     from: process.env.EMAIL,
-        //     to: user.email,
-        //     subject: 'Password Reset',
-        //     html: `
-        //         <h2>Password Reset Successful</h2>
-        //         <p>You have successfully reset your password.</p>
-        //     `
-        // });
-        const mailOptions = {
-            from: process.env.EMAIL,
+        await sendMail({
             to: user.email,
+            to_name: user.name,
             subject: 'Password Reset',
-            text: `You have successfully reset your password.`,
-            html: `Please click on the <a href="${process.env.FRONTEND_URL}/login">Login</a>.`
-        };
-        await transporter.sendMail(mailOptions);
+            text: `Your password has been reset successfully.You can now log in with your new password.`,
+            html: `
+                <h2> Password Reset Successful</ >
+                <p>Your password has been reset successfully.</p>
+                <p>
+                    You can now <a href="${process.env.FRONTEND_URL}/login">log in</a>
+                    using your new password.
+                </p>`
+        });
 
         return res.status(200).json({
             success: true,
@@ -265,21 +249,6 @@ const resetPassword = async (req, res) => {
         });
     }
 };
-
-let mailTry = 0;  // Counter to track the number of email sending attempts
-async function sendMail(mailOptions) {
-    if (mailTry <= 10) {
-        try {
-            await transporter.sendMail(mailOptions);
-            mailTry = 0;
-        }
-        catch (e) {
-            console.error(`${mailTry}: Error sending email:`, e);
-            sendMail(mailOptions);
-            mailTry++;
-        }
-    }
-}
 
 module.exports = {
     register,
