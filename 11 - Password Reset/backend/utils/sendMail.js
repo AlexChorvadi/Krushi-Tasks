@@ -15,7 +15,7 @@ async function sendMail({
     from = process.env.BREVO_SENDER_EMAIL,
     from_name = "Authentication System",
 }) {
-    console.log("Sending email to:", from);
+    // console.log("Sending email to:", from);
     try {
         const response = await client.transactionalEmails.sendTransacEmail({
             sender: {

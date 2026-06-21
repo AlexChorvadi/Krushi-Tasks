@@ -113,7 +113,7 @@ const forgot = async (req, res) => {
         user.resetTokenExpire = Date.now() + 10 * 60 * 1000;
         await user.save();
 
-        console.log("Reset Token:", user.email);
+        // console.log("Reset Token:", user.email);
 
         await sendMail({
             to: user.email,
