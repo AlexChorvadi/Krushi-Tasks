@@ -1,6 +1,8 @@
+**Live:** [Web](https://password-reset-krushi.netlify.app/)
+
 # Password Reset Web Application
 
-A full-stack web application for secure password reset functionality using React, Vite, Node.js, Express, and Resend for email verification.
+A full-stack web application for secure password reset functionality using React, Vite, Node.js, Express, and Brevo for email verification.
 
 ## 🎯 Features
 
@@ -10,7 +12,7 @@ A full-stack web application for secure password reset functionality using React
 - Responsive UI built with React and Vite
 - RESTful API backend with Express.js
 - MongoDB database integration
-- Email notifications using Resend
+- Email notifications using Brevo
 
 ## 🛠️ Tech Stack
 
@@ -23,7 +25,7 @@ A full-stack web application for secure password reset functionality using React
 - **Node.js** - JavaScript runtime
 - **Express.js** - Web framework
 - **MongoDB** - Database
-- **Resend** - Email service
+- **Brevo** - Email service
 - **Mongoose** - MongoDB ODM
 
 ## 📁 Project Structure
@@ -70,9 +72,8 @@ VITE_API_BASE_URL=http://localhost:3000/api
 MONGO_URI=mongodb://username:password@localhost:27017/password-reset-db
 PORT=3000
 FRONTEND_URL=http://localhost:5173
-BREVO_SMTP_KEY=your_BREVO_SMTP_KEY
-BREVO_API_KEY=your_BREVO_API_KEY
-BREVO_SENDER_EMAIL=your_BREVO_SENDER_EMAIL
+BREVO_SENDER_EMAIL=your-email@gmail.com
+Brevo_API_KEY=Brevo-api
 ```
 
 **Note:** For Gmail, use an [App Password](https://support.google.com/accounts/answer/185833) instead of your regular password.
@@ -126,75 +127,139 @@ npm run dev
 
 The application will be available at `http://localhost:5173`
 
-## 🔌 API Endpoints
+# Forgot Password API - Live
 
-### Authentication Routes
+Base URL: `https://password-reset-ajfj.onrender.com/api`
 
-#### 1. **Register User**
-```http
-POST /api/auth/register
-Content-Type: application/json
+This collection covers the full authentication and password reset flow, including user registration, login, forgot password, token verification, and password reset.
 
+---
+
+## Endpoints
+
+### 1. Register
+
+**POST** `/register`
+
+Registers a new user.
+
+**Request Body (JSON):**
+
+| Parameter  | Type   | Required | Description          |
+|------------|--------|----------|----------------------|
+| `name`     | string | Yes      | Full name of the user |
+| `email`    | string | Yes      | User's email address  |
+| `password` | string | Yes      | User's password       |
+
+**Example:**
+```json
 {
-  "email": "user@example.com",
-  "password": "password123",
-  "name": "John Doe"
+  "name": "your name",
+  "email": "yourmail@domain.com",
+  "password": "123456"
 }
 ```
 
-#### 2. **Login User**
-```http
-POST /api/auth/login
-Content-Type: application/json
+---
 
+### 2. Login
+
+**POST** `/login`
+
+Authenticates an existing user.
+
+**Request Body (JSON):**
+
+| Parameter  | Type   | Required | Description          |
+|------------|--------|----------|----------------------|
+| `email`    | string | Yes      | User's email address  |
+| `password` | string | Yes      | User's password       |
+
+**Example:**
+```json
 {
-  "email": "user@example.com",
-  "password": "password123"
+  "email": "yourmail@domain.com",
+  "password": "123456"
 }
 ```
 
-#### 3. **Forgot Password (Request Reset)**
-```http
-POST /api/auth/forgot-password
-Content-Type: application/json
+---
 
+### 3. Forgot Password
+
+**POST** `/forgot`
+
+Sends a password reset token to the user's email.
+
+**Request Body (JSON):**
+
+| Parameter | Type   | Required | Description          |
+|-----------|--------|----------|----------------------|
+| `email`   | string | Yes      | User's email address  |
+
+**Example:**
+```json
 {
-  "email": "user@example.com"
-}
-```
-**Response:** Sends verification link/OTP to email
-
-#### 4. **Verify Reset Token**
-```http
-POST /api/auth/verify-token
-Content-Type: application/json
-
-{
-  "token": "reset-token-from-email"
-}
-```
-
-#### 5. **Reset Password**
-```http
-POST /api/auth/reset-password
-Content-Type: application/json
-
-{
-  "token": "reset-token-from-email",
-  "newPassword": "newpassword123"
+  "email": "yourmail@domain.com"
 }
 ```
 
-#### 6. **Verify Email OTP**
-```http
-POST /api/auth/verify-otp
-Content-Type: application/json
+---
 
+### 4. Verify Token
+
+**POST** `/verify-token`
+
+Verifies the password reset token received via email.
+
+**Request Body (JSON):**
+
+| Parameter    | Type   | Required | Description                        |
+|--------------|--------|----------|------------------------------------|
+| `resetToken` | string | Yes      | The reset token sent to the user's email |
+
+**Example:**
+```json
 {
-  "email": "user@example.com",
-  "otp": "123456"
+  "resetToken": "c94b624e6efab757f59a3d17cfdc6c2827a5a8bcd4e97ee0507904036f40638a"
 }
 ```
+
+---
+
+### 5. Reset Password
+
+**POST** `/reset-password`
+
+Resets the user's password using the verified reset token.
+
+**Request Body (JSON):**
+
+| Parameter    | Type   | Required | Description                        |
+|--------------|--------|----------|------------------------------------|
+| `resetToken` | string | Yes      | The reset token sent to the user's email |
+| `email`      | string | Yes      | User's email address                |
+| `password`   | string | Yes      | The new password to set             |
+
+**Example:**
+```json
+{
+  "resetToken": "c94b624e6efab757f59a3d17cfdc6c2827a5a8bcd4e97ee0507904036f40638a",
+  "email": "yourmail@domain.com",
+  "password": "newPassword"
+}
+```
+
+---
+
+## Flow Summary
+
+1. **Register** a new user account.
+2. **Login** with your credentials.
+3. If you forget your password, call **Forgot Password** with your email to receive a reset token.
+4. **Verify Token** to confirm the reset token is valid.
+5. **Reset Password** using the token, your email, and the new password.
+
 
 ## 🚀 Usage
 
@@ -210,7 +275,7 @@ Content-Type: application/json
 
 ## 📧 Email Configuration
 
-The application uses RESEND to send password reset emails. Ensure you have:
+The application uses Brevo to send password reset emails. Ensure you have:
 
 - Valid email service configured (Gmail, SendGrid, etc.)
 - Email credentials stored securely in `.env`
