@@ -1,146 +1,148 @@
-[Postman Documentation](https://documenter.getpostman.com/view/54478653/2sBXwvK9Mi)
+# [Postman Documentation](https://documenter.getpostman.com/view/54478653/2sBXwvK9Mi)
 
-# JWT Auth API
+# Auth Backend
 
-A RESTful API for JWT-based user authentication. This collection covers user registration, login, and profile retrieval using JSON Web Tokens (JWT).
+Simple authentication backend built with Node.js, Express, MongoDB, JWT, and bcrypt.
 
-**Base URL:** `https://api-jwt-auth-q98v.onrender.com`
+## Features
 
----
+* User Registration
+* User Login
+* JWT Authentication
+* Protected Profile Route
+* Password Hashing with bcrypt
+* MongoDB Database
 
-## Authentication
+## Tech Stack
 
-Protected endpoints require a valid JWT Bearer token in the `Authorization` header:
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+* JWT
+* bcryptjs
+* dotenv
 
+## Project Structure
+
+```text
+├── config
+│   └── db.js
+├── controllers
+│   └── authController.js
+├── models
+│   └── authModel.js
+├── routes
+│   └── authRoutes.js
+├── .env
+├── server.js
 ```
-Authorization: Bearer <your_jwt_token>
+
+## Environment Variables
+
+Create a `.env` file:
+
+```env
+MONGO_URI=your_mongodb_connection_string
+PORT=3000
+TOKEN_SECRET=your_jwt_secret
+FRONTEND_URL=http://localhost:5173
 ```
 
-The token is obtained from the **Login** endpoint and stored in the `{{supabase_service_role_api_key_0n9l}}` vault variable.
+## Installation
 
----
+```bash
+npm install
+```
 
-## Endpoints
+## Run Server
 
-### 1. Register
+```bash
+node server.js
+```
+
+Server runs on:
+
+```text
+http://localhost:3000
+```
+
+## API Endpoints
+
+### Register
 
 **POST** `/api/register`
 
-Registers a new user account in the system.
-
-#### Request Body (`application/json`)
-
-| Field      | Type   | Required | Description                                  |
-|------------|--------|----------|----------------------------------------------|
-| `name`     | string | Yes      | Full name of the user                        |
-| `email`    | string | Yes      | Email address (must be unique)               |
-| `password` | string | Yes      | Password for the account                     |
-| `gender`   | string | Yes      | Gender of the user (e.g. `Male`, `Female`)   |
-| `hobby`    | string | No       | Comma-separated list of the user's hobbies   |
-
-#### Example Request
-
 ```json
 {
-  "name": "Chorvadi Krushi",
-  "email": "krushi@gmail.com",
+  "name": "Krushi",
+  "email": "admin@gmail.com",
   "password": "123456",
   "gender": "Male",
-  "hobby": "fun, sleep, eat, etc"
+  "hobby": "Reading, Coding"
 }
 ```
 
-#### Notes
-- On success, the server returns a confirmation of the newly created user.
-- The `email` field must be unique across all registered users.
-
----
-
-### 2. Login
+### Login
 
 **POST** `/api/login`
 
-Authenticates a user with their email and password. On success, returns a signed JWT access token along with the user's profile information.
-
-#### Request Body (`application/json`)
-
-| Field      | Type   | Required | Description                       |
-|------------|--------|----------|-----------------------------------|
-| `email`    | string | Yes      | The registered email of the user  |
-| `password` | string | Yes      | The account password              |
-
-#### Example Request
-
 ```json
 {
-  "email": "krushi@gmail.com",
+  "email": "admin@gmail.com",
   "password": "123456"
 }
 ```
 
-#### Example Response (`200 OK`)
+Response:
 
 ```json
 {
-  "accessToken": "<JWT token>",
+  "accessToken": "jwt_token",
   "user": {
-    "name": "Chorvadi Krushi",
-    "email": "krushi@gmail.com",
+    "name": "Krushi",
+    "email": "admin@gmail.com",
     "gender": "Male",
-    "hobby": "fun, sleep, eat, etc"
+    "hobby": "Reading, Coding"
   }
 }
 ```
 
-| Field         | Type   | Description                                      |
-|---------------|--------|--------------------------------------------------|
-| `accessToken` | string | Signed JWT token to be used for protected routes |
-| `user`        | object | Authenticated user's profile information         |
-
----
-
-### 3. Profile
+### Profile (Protected Route)
 
 **GET** `/api/profile`
 
-Retrieves the authenticated user's profile information. Requires a valid JWT Bearer token.
+Headers:
 
-#### Headers
+```text
+Authorization: Bearer <token>
+```
 
-| Key             | Value                                           | Required |
-|-----------------|-------------------------------------------------|----------|
-| `Authorization` | `Bearer {{supabase_service_role_api_key_0n9l}}` | Yes      |
-
-No request body is required.
-
-#### Example Response (`200 OK`)
+Response:
 
 ```json
 {
   "success": true,
   "user": {
-    "name": "Chorvadi Krushi",
-    "email": "krushi@gmail.com",
+    "name": "Krushi",
+    "email": "admin@gmail.com",
     "gender": "Male",
-    "hobby": "fun, sleep, eat, etc"
+    "hobby": "Reading, Coding"
   }
 }
 ```
 
----
+## Live API
 
-## Variables
+Base URL:
 
-| Variable                            | Scope | Description                                      |
-|-------------------------------------|-------|--------------------------------------------------|
-| `supabase_service_role_api_key_0n9l`| Vault | JWT Bearer token obtained after a successful login |
-| `bearer_token_19e6`                 | Vault | Alternative Bearer token variable                |
+```text
+https://api-jwt-auth-q98v.onrender.com
+```
 
----
+## Notes
 
-## Getting Started
-
-1. **Register** a new user using the `/api/register` endpoint.
-2. **Login** with your credentials via `/api/login` to receive a JWT `accessToken`.
-3. Store the token in the `supabase_service_role_api_key_0n9l` vault variable.
-4. Use the **Profile** endpoint to retrieve your user details — the token will be sent automatically via the `Authorization` header.
+* Passwords are securely hashed using bcrypt.
+* JWT token is generated after successful login.
+* Protected routes require a valid Bearer Token.
+* Built using MVC architecture.
